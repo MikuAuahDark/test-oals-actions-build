@@ -1,0 +1,25 @@
+name: deleted-later
+on: [push]
+
+jobs:
+  windows-why:
+    runs-on: windows-latest
+    continue-on-error: ${{ matrix.platform == 'ARM64' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [Win32, x64, ARM64]
+        release: [master, openal-soft-1.21.0, openal-soft-1.20.1, openal-soft-1.20.0, openal-soft-1.19.1]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: openal-soft
+        repository: kcat/openal-soft
+        ref: ${{ matrix.release }}
+    - name: Configure
+      shell: cmd
+      run: cmake -Bbuild -Hopenal-soft -DCMAKE_INSTALL_PREFIX=%CD%\install
+    - name: Build & Install
+      shell: cmd
+      run: cmake --build build --config Release --target install
