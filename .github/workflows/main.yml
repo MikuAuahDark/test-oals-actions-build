@@ -8,8 +8,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [Win32, x64, ARM64]
-        release: [master, openal-soft-1.21.0, openal-soft-1.20.1]
+        platform: [x64]
+        release: [master, '61cf6d3bb656c8d7f04f5c77f6bd28294551395e']
     steps:
     - name: Print Environment Variables
       shell: cmd
