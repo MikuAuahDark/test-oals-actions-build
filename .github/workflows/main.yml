@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [x64]
-        release: [master, 'e89978195f3910693958b8faebbd88b4643f8d57']
+        release: [master, 'e3f6afafdeab3c5ec8e28c3f9b6b26fbcf5f37bf']
     steps:
     - name: Print Environment Variables
       shell: cmd
