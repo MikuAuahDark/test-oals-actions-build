@@ -14,7 +14,17 @@ jobs:
     - name: Print Environment Variables
       shell: cmd
       run: set
-    - name: Checkout
+    - name: Print CMake Version
+      shell: cmd
+      run: cmake --version
+    - name: Checkout Current Repository
+      uses: actions/checkout@v2
+      with:
+        path: repo
+    - name: Dump all CMake variables starting with CMAKE_VS_
+      shell: cmd
+      run: cmake -B__dummy__ -Hrepo/cmakevardump
+    - name: Checkout OpenAL-soft
       uses: actions/checkout@v2
       with:
         path: openal-soft
