@@ -4,12 +4,12 @@ on: [push]
 jobs:
   windows-why:
     runs-on: windows-latest
-    continue-on-error: ${{ matrix.platform == 'ARM64' }}
+    continue-on-error: ${{ matrix.release == 'master' }}
     strategy:
       fail-fast: false
       matrix:
         platform: [x64]
-        release: [master, '61cf6d3bb656c8d7f04f5c77f6bd28294551395e']
+        release: [master, 'e89978195f3910693958b8faebbd88b4643f8d57']
     steps:
     - name: Print Environment Variables
       shell: cmd
