@@ -4,12 +4,10 @@ on: [push]
 jobs:
   windows-why:
     runs-on: windows-latest
-    continue-on-error: ${{ matrix.release == 'master' }}
     strategy:
       fail-fast: false
       matrix:
-        platform: [x64]
-        release: [master, '873983377052594b418bfa6cd505df7c604792ea', 'f49238c79278bb019e618b23d9b86d2ba15f82c2', 'be476c793574fcde7bb78df1595257cc52f4c93a']
+        platform: [Win32, x64, ARM64]
     steps:
     - name: Print Environment Variables
       shell: cmd
@@ -29,7 +27,6 @@ jobs:
       with:
         path: openal-soft
         repository: kcat/openal-soft
-        ref: ${{ matrix.release }}
     - name: Configure
       shell: cmd
       env:
@@ -38,3 +35,8 @@ jobs:
     - name: Build & Install
       shell: cmd
       run: cmake --build build --config Release --target install
+    - name: Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: openal-soft-${{ matrix.platform }}
+        path: install
